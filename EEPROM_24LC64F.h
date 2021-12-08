@@ -1,5 +1,5 @@
 /*
- * 24LC64F - library for 24LC64F EEPROM
+ * EEPROM_24LC64F - library for EEPROM_24LC64F EEPROM
  * This library is intended to be used with Aruino and the Arduino Wire library functions
  * 
  * Version 1.0
@@ -15,7 +15,7 @@
  *
  ************************************************************************
  *
- * Wiring diagram for EEPROM chip 24LC64F
+ * Wiring diagram for EEPROM chip EEPROM_24LC64F
  *  
  *        ----
  *  1 A0-|    |-VCC 8
@@ -25,8 +25,8 @@
  *        ----
  */
 
-#ifndef 24LC64F_H
-#define 24LC64F_H
+#ifndef EEPROM_24LC64F_H
+#define EEPROM_24LC64F_H
 
 #if ARDUINO >= 100
 #include "Arduino.h"
@@ -34,15 +34,15 @@
 #include "WProgram.h"
 #endif
 
-class 24LC64F {
+class EEPROM_24LC64F {
 private:
 	int address;
 	void busyCheck();
 
 public:
-	24LC64F(int EEPROM_Address);
-	void writeMem(int startAddressHigh, int startAddressLow, int data[]);
-	void readMem(int startAddressHigh, int startAddressLow, int readAmount, int *buffer);
+	EEPROM_24LC64F(int EEPROM_Address);
+	void writeMem(int startAddressHigh, int startAddressLow, int data[], int dataSize);
+	void readMem(int startAddressHigh, int startAddressLow, int readAmount, char *buffer);
 };
 
 #endif
