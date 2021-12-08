@@ -2,8 +2,8 @@
  * EEPROM_24LC64F - library for EEPROM_24LC64F EEPROM
  * This library is intended to be used with Aruino and the Arduino Wire library functions
  * 
- * Version 1.0
- * Last updated - 5/9/17
+ * Version 1.0.0
+ * Last updated - 12/8/21
  * John Karatka
  *
  * This program is distributed in the hope that it will be useful,
