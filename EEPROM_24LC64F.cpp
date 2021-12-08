@@ -1,5 +1,5 @@
 /*
- * 24LC64F - library for 24LC64F EEPROM
+ * EEPROM_24LC64F - library for EEPROM_24LC64F EEPROM
  * This library is intended to be used with Arduino and the Aruino Wire library functions
  *
  * Version 1.0
@@ -15,7 +15,7 @@
  *
  ************************************************************************
  *
- * Wiring diagram for EEPROM chip 24LC64F
+ * Wiring diagram for EEPROM chip EEPROM_24LC64F
  *
  *        ----
  *  1 A0-|    |-VCC 8
@@ -32,10 +32,10 @@
 #endif
 
 #include <Wire.h>
-#include "24LC64F.h"
+#include "EEPROM_24LC64F.h"
 
 //! Constructor
-24LC64F::24LC64F(int EEPROM_Address) {
+EEPROM_24LC64F::EEPROM_24LC64F(int EEPROM_Address) {
 	address = EEPROM_Address;
 	Wire.begin();
 }
@@ -44,7 +44,7 @@
  * @brief Checks if chip has finished writing data; requests until ACK or timeout
  * @retval None
  */
-void 24LC64F::busyCheck() {
+void EEPROM_24LC64F::busyCheck() {
 	int counter = 0;
 	int writeCheck;
 	do {
@@ -55,7 +55,6 @@ void 24LC64F::busyCheck() {
 		#else
 			Wire.send(0);
 		#endif
-
 		writeCheck = Wire.endTransmission();
 		counter++;
 		if (counter == 1000) {
@@ -72,86 +71,24 @@ void 24LC64F::busyCheck() {
  * @param  data[]: Array of data that is to be written
  * @retval None
  */
-void 24LC64F::writeMem(int startAddressHigh, int startAddressLow, int data[]) {
-	int dataSize = sizeof(data);
-	int sendCount = dataSize / 32;					//The chip can only accept 32 bytes of data per page
-	int leftOver = dataSize - (sendCount * 32);		//Gets leftover amount of data
-	int dataCount = 0;
-
-	if ((sendCount == 0) && (dataSize > 0)) {		//If the total amount of send data is less than 32, send the data normally
-		Wire.beginTransmission(address);
-
-			#if ARDUINO >= 100
-				Wire.write(startAddressHigh);
-				Wire.write(startAddressLow);
-			#else
-				Wire.send(startAddressHigh);
-				Wire.send(startAddressLow);
-			#endif
-
-		for (int i = 0; i < dataSize; i++) {
-
-			#if ARDUINO >= 100
-				Wire.write(data[i]);
-			#else
-				Wire.send(data[i]);
-			#endif
-
-		}
-		Wire.endTransmission();
-		busyCheck();
+void EEPROM_24LC64F::writeMem(int startAddressHigh, int startAddressLow, int data[], int dataSize) {
+	Wire.beginTransmission(address);
+	#if ARDUINO >= 100
+		Wire.write(startAddressHigh);
+		Wire.write(startAddressLow);
+	#else
+		Wire.send(startAddressHigh);
+		Wire.send(startAddressLow);
+	#endif
+	for (int i = 0; i <= dataSize; i++) {
+		#if ARDUINO >= 100
+		Wire.write(data[i]);
+		#else
+		Wire.send(data[i]);
+		#endif
 	}
-
-	else {											//If the data is over 32, send multiple times because 32 bytes is the limit of each page write
-		for (int j = 0; j < sendCount; j++) {
-			Wire.beginTransmission(address);
-
-			#if ARDUINO >= 100
-				Wire.write(startAddressHigh);
-				Wire.write(startAddressLow);
-			#else
-				Wire.send(startAddressHigh);
-				Wire.send(startAddressLow);
-			#endif
-
-			for (int r = 0; r < 31; r++) {
-
-				#if ARDUINO >= 100
-					Wire.write(data[dataCount]);
-				#else
-					Wire.send(data[dataCount]);
-				#endif
-
-				dataCount++;
-			}
-			Wire.endTransmission();
-			busyCheck();
-		}
-		if (leftOver > 0) {							//Any leftover data gets sent
-			Wire.beginTransmission(address);
-
-			#if ARDUINO >= 100
-				Wire.write(startAddressHigh);
-				Wire.write(startAddressLow);
-			#else
-				Wire.send(startAddressHigh);
-				Wire.send(startAddressLow);
-			#endif
-
-			for (int k = 0; k < leftOver; k++) {
-
-				#if ARDUINO >= 100
-					Wire.write(data[dataCount]);
-				#else
-					Wire.send(data[dataCount]);
-				#endif
-
-				dataCount++;
-			}
-			Wire.endTransmission();
-			busyCheck();
-		}
-	}
+	Wire.endTransmission();
+	busyCheck();
 }
 
 /*
@@ -162,9 +99,8 @@ void 24LC64F::writeMem(int startAddressHigh, int startAddressLow, int data[]) {
  * @param  *buffer: Buffer array for read data to be placed into
  * @retval None
  */
-void 24LC64F::readMem(int startAddressHigh, int startAddressLow, int readAmount, int *buffer) {
+void EEPROM_24LC64F::readMem(int startAddressHigh, int startAddressLow, int readAmount, char *buffer) {
 	Wire.beginTransmission(address);
-
 	#if ARDUINO >= 100
 		Wire.write(startAddressHigh);
 		Wire.write(startAddressLow);
@@ -172,7 +108,6 @@ void 24LC64F::readMem(int startAddressHigh, int startAddressLow, int readAmount,
 		Wire.send(startAddressHigh);
 		Wire.send(startAddressLow);
 	#endif
-
 	Wire.endTransmission(false);
 	Wire.requestFrom(address, readAmount);
 	for (int i = 0; i < readAmount; i++) {
