@@ -1,5 +1,5 @@
 /*
- * 24LC64F - library for 2424LC64FF EEPROM
+ * 24LC64F - library for 24LC64F EEPROM
  * This library is intended to be used with Aruino and the Arduino Wire library functions
  * 
  * Version 1.0
