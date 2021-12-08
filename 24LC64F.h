@@ -15,11 +15,11 @@
  *
  ************************************************************************
  *
- * Wiring diagram for EEPROM chip 2424LC64FF
+ * Wiring diagram for EEPROM chip 24LC64F
  *  
  *        ----
  *  1 A0-|    |-VCC 8
- *  2 A1-|    |-VCC 7
+ *  2 A1-|    |-WP 7
  *  3 A2-|    |-SCL 6
  *  4  G-|    |-SDA 5
  *        ----
