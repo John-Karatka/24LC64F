@@ -1,9 +1,9 @@
-#include <24LC64F.h>
+#include <EEPROM_24LC64F.h>
 #include <Wire.h>
 
-#define address 0		//address of chip
+#define address 80		//address of chip
 
-24LC64F tmp(address);
+EEPROM_24LC64F tmp(address);
 
 void setup() {
     Wire.begin();
@@ -13,14 +13,17 @@ void setup() {
 void loop() {
   int startAddressHigh = 0;
   int startAddressLow = 0;
-  int readAmount = 4;
-  int buffer[4];
-  int data[4] = {'T', 'e', 's', 't'};
+  int data[] = {'t', 'e', 's', 't', 'i', 'n', 'g'};
+  int dataSize = (sizeof(data)/sizeof(data[0]));
+  char buffer[dataSize];
+  int readAmount = dataSize;
   
-  tmp.writeMem(startAddressHigh, startAddressLow, data);					//write to chip memory
+  tmp.writeMem(startAddressHigh, startAddressLow, data, dataSize);      //write to chip memory
   tmp.readMem(startAddressHigh, startAddressLow, readAmount, buffer);		//read data that was written
   
   for (int i = 0; i < readAmount; i++) {
     Serial.print(buffer[i]);												//print data
   }
+  Serial.println();
+  delay(1000);
 }
