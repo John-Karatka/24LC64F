@@ -71,7 +71,7 @@ void EEPROM_24LC64F::busyCheck() {
  * @param  data[]: Array of data that is to be written
  * @retval None
  */
-void EEPROM_24LC64F::writeMem(int startAddressHigh, int startAddressLow, int data[], int dataSize) {
+void EEPROM_24LC64F::writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char data[], int dataSize) {
 	if (dataSize > 32) {
 		Serial.println("WARNING: Exeeded maximum page size. Maximum amount of bytes per page is 32");
 	}
@@ -104,7 +104,7 @@ void EEPROM_24LC64F::writeMem(int startAddressHigh, int startAddressLow, int dat
  * @param  *buffer: Buffer array for read data to be placed into
  * @retval None
  */
-void EEPROM_24LC64F::readMem(int startAddressHigh, int startAddressLow, int readAmount, char *buffer) {
+void EEPROM_24LC64F::readMem(unsigned char startAddressHigh, unsigned char startAddressLow, int readAmount, unsigned char *buffer) {
 	Wire.beginTransmission(address);
 	#if ARDUINO >= 100
 		Wire.write(startAddressHigh);
