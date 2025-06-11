@@ -41,7 +41,7 @@ private:
 
 public:
 	EEPROM_24LC64F(int EEPROM_Address);
-	void writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char data[], int dataSize);
+	void writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char *data, int dataSize);
 	void readMem(unsigned char startAddressHigh, unsigned char startAddressLow, int readAmount, unsigned char *buffer);
 };
 
