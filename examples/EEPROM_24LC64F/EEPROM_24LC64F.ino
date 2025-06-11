@@ -21,7 +21,7 @@ void loop() {
   tmp.readMem(startAddressHigh, startAddressLow, readAmount, buffer);   //read data that was written
   
   for (int i = 0; i < readAmount; i++) {
-    Serial.println(buffer[i]);                        //print data
+    Serial.println(char(buffer[i]));                        //print data
   }
   delay(1000);
 }
