@@ -68,7 +68,7 @@ void EEPROM_24LC64F::busyCheck() {
  * @brief  Writes data to chip memory
  * @param  startAddressHigh: Start address high byte
  * @param  startAddressLow: Start address low byte
- * @param  data[]: Array of data that is to be written
+ * @param  *data: Array of data that is to be written
  * @retval None
  */
 void EEPROM_24LC64F::writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char *data, int dataSize) {
