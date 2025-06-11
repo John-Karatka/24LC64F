@@ -10,11 +10,11 @@ void setup() {
 }
 
 void loop() {
-  int startAddressHigh = 0;
-  int startAddressLow = 0;
-  int data[] = {'t', 'e', 's', 't', 'i', 'n', 'g'};
+  uint8_t startAddressHigh = 0;
+  uint8_t startAddressLow = 0;
+  uint8_t data[] = {'t', 'e', 's', 't', 'i', 'n', 'g'};
   int dataSize = (sizeof(data)/sizeof(data[0]));
-  char buffer[dataSize];
+  uint8_t buffer[dataSize];
   int readAmount = dataSize;
   
   tmp.writeMem(startAddressHigh, startAddressLow, data, dataSize);      //write to chip memory
