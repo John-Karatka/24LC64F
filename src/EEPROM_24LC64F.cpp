@@ -71,7 +71,7 @@ void EEPROM_24LC64F::busyCheck() {
  * @param  data[]: Array of data that is to be written
  * @retval None
  */
-void EEPROM_24LC64F::writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char data[], int dataSize) {
+void EEPROM_24LC64F::writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char *data, int dataSize) {
 	if (dataSize > 32) {
 		Serial.println("WARNING: Exeeded maximum page size. Maximum amount of bytes per page is 32");
 	}
