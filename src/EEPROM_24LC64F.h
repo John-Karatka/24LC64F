@@ -36,13 +36,13 @@
 
 class EEPROM_24LC64F {
 private:
-	int address;
+	unsigned char address;
 	void busyCheck();
 
 public:
 	EEPROM_24LC64F(int EEPROM_Address);
-	void writeMem(int startAddressHigh, int startAddressLow, int data[], int dataSize);
-	void readMem(int startAddressHigh, int startAddressLow, int readAmount, char *buffer);
+	void writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char data[], int dataSize);
+	void readMem(unsigned char startAddressHigh, unsigned char startAddressLow, int readAmount, unsigned char *buffer);
 };
 
 #endif
