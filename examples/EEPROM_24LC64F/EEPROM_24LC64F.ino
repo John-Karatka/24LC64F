@@ -3,7 +3,7 @@
 
 #define address 80    //address of chip
 
-EEPROM_24LC64F tmp(address);
+EEPROM_24LC64F eepr(address);
 
 void setup() {
   Serial.begin(9600);
@@ -17,8 +17,8 @@ void loop() {
   uint8_t buffer[dataSize];
   int readAmount = dataSize;
   
-  tmp.writeMem(startAddressHigh, startAddressLow, data, dataSize);      //write to chip memory
-  tmp.readMem(startAddressHigh, startAddressLow, readAmount, buffer);   //read data that was written
+  eepr.writeMem(startAddressHigh, startAddressLow, data, dataSize);      //write to chip memory
+  eepr.readMem(startAddressHigh, startAddressLow, readAmount, buffer);   //read data that was written
   
   for (int i = 0; i < readAmount; i++) {
     Serial.println(char(buffer[i]));                        //print data
