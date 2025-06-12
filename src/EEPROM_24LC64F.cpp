@@ -33,6 +33,7 @@
 
 #include <Wire.h>
 #include "EEPROM_24LC64F.h"
+#include <stdint.h>
 
 //! Constructor
 EEPROM_24LC64F::EEPROM_24LC64F(int EEPROM_Address) {
@@ -71,7 +72,10 @@ void EEPROM_24LC64F::busyCheck() {
  * @param  *data: Array of data that is to be written
  * @retval None
  */
-void EEPROM_24LC64F::writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char *data, int dataSize) {
+void EEPROM_24LC64F::writeMem(uint16_t startAddress, uint8_t *data, int dataSize) {
+	uint8_t startAddressHigh = (startAddress >> 8) & 0xFF;
+	uint8_t startAddressLow = (startAddress >> 0) & 0xFF;
+	
 	if (dataSize > 32) {
 		Serial.println("WARNING: Exeeded maximum page size. Maximum amount of bytes per page is 32");
 	}
@@ -104,7 +108,10 @@ void EEPROM_24LC64F::writeMem(unsigned char startAddressHigh, unsigned char star
  * @param  *buffer: Buffer array for read data to be placed into
  * @retval None
  */
-void EEPROM_24LC64F::readMem(unsigned char startAddressHigh, unsigned char startAddressLow, int readAmount, unsigned char *buffer) {
+void EEPROM_24LC64F::readMem(uint16_t startAddress, int readAmount, uint8_t *buffer) {
+	uint8_t startAddressHigh = (startAddress >> 8) & 0xFF;
+	uint8_t startAddressLow = (startAddress >> 0) & 0xFF;
+	
 	Wire.beginTransmission(address);
 	#if ARDUINO >= 100
 		Wire.write(startAddressHigh);
