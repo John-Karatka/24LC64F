@@ -33,6 +33,7 @@
 #else
 #include "WProgram.h"
 #endif
+#include <stdint.h>
 
 class EEPROM_24LC64F {
 private:
@@ -41,8 +42,8 @@ private:
 
 public:
 	EEPROM_24LC64F(int EEPROM_Address);
-	void writeMem(unsigned char startAddressHigh, unsigned char startAddressLow, unsigned char *data, int dataSize);
-	void readMem(unsigned char startAddressHigh, unsigned char startAddressLow, int readAmount, unsigned char *buffer);
+	void writeMem(uint16_t startAddress, uint8_t *data, int dataSize);
+	void readMem(uint16_t startAddress, int readAmount, uint8_t *buffer);
 };
 
 #endif
