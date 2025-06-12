@@ -67,8 +67,7 @@ void EEPROM_24LC64F::busyCheck() {
 
 /*
  * @brief  Writes data to chip memory
- * @param  startAddressHigh: Start address high byte
- * @param  startAddressLow: Start address low byte
+ * @param  startAddress: Address where we start writing
  * @param  *data: Array of data that is to be written
  * @retval None
  */
@@ -102,8 +101,7 @@ void EEPROM_24LC64F::writeMem(uint16_t startAddress, uint8_t *data, int dataSize
 
 /*
  * @brief  Reads data from chip memory and places into buffer
- * @param  startAddressHigh: Start address high byte
- * @param  startAddressLow: Start address low byte
+ * @param  startAddres: Address where we start reading
  * @param  readAmount: Amount of data to be read
  * @param  *buffer: Buffer array for read data to be placed into
  * @retval None
