@@ -1,4 +1,5 @@
 [![Arduino CI](https://github.com/John-Karatka/24LC64F/workflows/Arduino_CI/badge.svg)](https://github.com/marketplace/actions/Arduino_CI)
+[![GitHub issues](https://img.shields.io/github/issues/John-Karatka/24LC64F.svg)](https://github.com/John-Karatka/24LC64F/issues)
 
 # EEPROM_24LC64F
 
