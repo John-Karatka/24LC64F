@@ -1,3 +1,5 @@
+[![Arduino CI](https://github.com/John-Karatka/24LC64F/workflows/Arduino_CI/badge.svg)](https://github.com/marketplace/actions/Arduino_CI)
+
 # EEPROM_24LC64F
 
 Arduino library for 24LC64F EEPROM chip. This library is able to read and write data to the 24LC64F EEPROM chip
